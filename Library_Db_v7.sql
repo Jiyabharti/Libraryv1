@@ -182,6 +182,9 @@ VALUES
 (19, 6),
 (20, 9);
 
+select * from
+BookAuthor;
+
 create table BookFormat 
 (
 BookTypeID int auto_increment primary key,
@@ -310,10 +313,18 @@ create table Guardian
 (
 AdultID int,
 ChildID int,
+<<<<<<< HEAD:Library_Db_v5.sql
 foreign key (AdultID) references Adult_Identifier (AdultID),
 foreign key (ChildID) references Child_Identifier (ChildID)
 );
 
+=======
+foreign key (ChildID) references Child_Identifier (ChildID),
+foreign key (AdultID) references Adult_Identifier (AdultID)
+);
+
+
+>>>>>>> refs/remotes/origin/main:Library_Db_v7.sql
 insert into Guardian (AdultID, ChildID)
 values
 (1, 1),
@@ -400,3 +411,24 @@ values (1, 1, "2024-02-09", "2024-03-09","2024-03-14", 0, 1, 1),
 select * from
 loan;
 
+<<<<<<< HEAD:Library_Db_v5.sql
+=======
+-- view code begins
+-- Create a view combining information from the person and address tables
+create view vNames_and_Addresses as
+select person.personID,
+       person.firstname,
+       person.lastname,
+       concat(person.firstname, ' ', person.lastname) as Fullname,
+       address.addressID,
+       address.housenumber,
+       address.streetname,
+       concat(address.housenumber, ' ', address.streetname) as 'First line of Address'
+from person 
+join address on person.addressID = address.addressID;
+
+--  view code ends
+
+-- Retrieve data from the created view
+select * from vNames_and_Addresses;
+>>>>>>> refs/remotes/origin/main:Library_Db_v7.sql
