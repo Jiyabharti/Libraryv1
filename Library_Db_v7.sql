@@ -182,6 +182,9 @@ VALUES
 (19, 6),
 (20, 9);
 
+select * from
+BookAuthor;
+
 create table BookFormat 
 (
 BookTypeID int auto_increment primary key,
@@ -310,24 +313,23 @@ create table Guardian
 (
 AdultID int,
 ChildID int,
-AddressID int,
-foreign key (AdultID) references Adult_Identifier (AdultID),
 foreign key (ChildID) references Child_Identifier (ChildID),
-foreign key (AddressID) references address (AddressID)
+foreign key (AdultID) references Adult_Identifier (AdultID)
 );
 
-insert into Guardian (AdultID, ChildID, AddressID)
+
+insert into Guardian (AdultID, ChildID)
 values
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 3),
-(4, 4, 4),
-(5, 5, 5),
-(6, 6, 6),
-(7, 7, 7),
-(8, 8, 8),
-(9, 9, 9),
-(10, 10, 10);
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10);
 
 select * from
 guardian;
@@ -401,3 +403,22 @@ values (1, 1, "2024-02-09", "2024-03-09","2024-03-14", 0, 1, 1),
 
 select * from
 loan;
+
+-- view code begins
+-- Create a view combining information from the person and address tables
+create view vNames_and_Addresses as
+select person.personID,
+       person.firstname,
+       person.lastname,
+       concat(person.firstname, ' ', person.lastname) as Fullname,
+       address.addressID,
+       address.housenumber,
+       address.streetname,
+       concat(address.housenumber, ' ', address.streetname) as 'First line of Address'
+from person 
+join address on person.addressID = address.addressID;
+
+--  view code ends
+
+-- Retrieve data from the created view
+select * from vNames_and_Addresses;
