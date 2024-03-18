@@ -400,3 +400,19 @@ values (1, 1, "2024-02-09", "2024-03-09","2024-03-14", 0, 1, 1),
 select * from
 loan;
 
+
+-- Select Procedure for joining bookuse, book & bookformat
+delimiter $$
+CREATE PROCEDURE join_bookuse_bookformat_book()
+BEGIN
+
+    -- Selecting relevant columns from all three tables
+ 
+SELECT book.bookID, title, BookType, Total_owned, Total_rented, Total_available
+FROM BookFormat
+INNER JOIN Bookuse ON Bookformat.BookTypeID = BookUse.BookTypeID
+INNER JOIN Book ON BookUse.bookID = Book.BookID;
+END $$
+delimiter ;
+
+CALL join_bookuse_bookformat_book();
