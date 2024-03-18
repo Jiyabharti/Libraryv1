@@ -310,24 +310,22 @@ create table Guardian
 (
 AdultID int,
 ChildID int,
-AddressID int,
 foreign key (AdultID) references Adult_Identifier (AdultID),
-foreign key (ChildID) references Child_Identifier (ChildID),
-foreign key (AddressID) references address (AddressID)
+foreign key (ChildID) references Child_Identifier (ChildID)
 );
 
-insert into Guardian (AdultID, ChildID, AddressID)
+insert into Guardian (AdultID, ChildID)
 values
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 3),
-(4, 4, 4),
-(5, 5, 5),
-(6, 6, 6),
-(7, 7, 7),
-(8, 8, 8),
-(9, 9, 9),
-(10, 10, 10);
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10);
 
 select * from
 guardian;
